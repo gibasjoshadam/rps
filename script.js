@@ -18,14 +18,28 @@ function getComputerChoice(){
 
 userChoices.forEach((button) => {
     button.addEventListener("click", () => {
-        userSelectedChoice = button.textContent.toLowerCase();
-        computerSelectedChoice = getComputerChoice();
-        playRound(userSelectedChoice, computerSelectedChoice);
-        userImg.src=`images/${userSelectedChoice}.png`;
-        computerImg.src = `images/${computerSelectedChoice}.png`;
-        updateScore();
+        if(checkScore()){}
+        else{
+            userSelectedChoice = button.textContent.toLowerCase();
+            computerSelectedChoice = getComputerChoice();
+            playRound(userSelectedChoice, computerSelectedChoice);
+            userImg.src=`images/${userSelectedChoice}.png`;
+            computerImg.src = `images/${computerSelectedChoice}.png`;
+            updateScore();
+            checkScore();
+        };
     });
 })
+
+function checkScore(){
+    if (userHScore.value === 5){
+        alert("how did u win");
+        return true;
+    }else if (computerHScore.value === 5){
+        alert("u lost u nerd")
+        return true;
+    }else return false;
+}
 
 function updateScore(){
     userHScore.textContent = userHScore.value;

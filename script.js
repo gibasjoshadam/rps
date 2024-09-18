@@ -1,3 +1,13 @@
+const userChoices = document.querySelectorAll("button");
+const userImg = document.querySelector("#userChoice");
+const computerImg = document.querySelector("#computerChoice");
+const userHScore = document.querySelector(".myScore");
+const computerHScore = document.querySelector(".compScore")
+
+userHScore.value = 0;
+computerHScore.value = 0;
+
+let userSelectedChoice = '', computerSelectedChoice = '';
 let userScore = 0, computerScore = 0;
 
 function getComputerChoice(){
@@ -6,44 +16,62 @@ function getComputerChoice(){
     return choices[num];
 }
 
-function playRound(user, computer){
-    user = user.toLowerCase();
+userChoices.forEach((button) => {
+    button.addEventListener("click", () => {
+        userSelectedChoice = button.textContent.toLowerCase();
+        computerSelectedChoice = getComputerChoice();
+        playRound(userSelectedChoice, computerSelectedChoice);
+        userImg.src=`images/${userSelectedChoice}.png`;
+        computerImg.src = `images/${computerSelectedChoice}.png`;
+        updateScore();
+    });
+})
 
+function updateScore(){
+    userHScore.textContent = userHScore.value;
+    computerHScore.textContent = computerHScore.value;
+}
+
+function playRound(user, computer){
     let winCond = (computer === "rock" && user === "paper") || (computer === "paper" && user === "scissors") || (computer === "scissors" && user === "rock");
 
     console.log(`Your choice: ${user}, Computer choice: ${computer}`);
 
     if (user === "rock" || user === "paper" || user === "scissors"){
         if (user === computer){
-            return "Draw!";
+            return "draw";
         }else if (winCond){
-            userScore++;
-            return `you won?? ${user} beats ${computer}!`;
+            userHScore.value++;
+            return `win`;
         }else {
-            computerScore++;
-            return `You lost. ${computer} beats ${user}.`;
+            computerHScore.value++;
+            return `loss`;
         }
     }else{
-        return "Not a valid choice.";
+        return "error";
     }
 }
 
+/*
 function getUserChoice(){
-    let userChoice = prompt("rock, paper, or scissors: ");
+    /*let userChoice = prompt("rock, paper, or scissors: ");
     return userChoice;
-}
+}*/
 
-function gamePlay(){
+/*function gamePlay(){
     let rounds = prompt("How many rounds would you like to lose? ");
     for(let i = 1; i <= rounds; i++){
         console.log(playRound(getUserChoice(), getComputerChoice()));
     }
     return scoreTally(userScore, computerScore);
-}
+}*/
 
-function scoreTally(user, computer){
-    return `Final score
-Your score: ${user}, computer score: ${computer}`;
-}
+/*function scoreTally(user, computer){
+    console.log(`Final score
+Your score: ${user}, computer score: ${computer}`);
+}*/
 
-console.log(gamePlay());
+/*
+//console.log(gamePlay());
+console.log(playRound(getUserChoice(), getComputerChoice()));
+console.log(scoreTally(userScore, computerScore));*/

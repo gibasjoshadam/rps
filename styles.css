@@ -1,0 +1,42 @@
+body{
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:48px;
+}
+
+.mainCont{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:24px;
+}
+
+img{
+    height: 400px;
+    width:400px;
+}
+
+.scoring{
+    display:flex;
+    gap:12px;
+}
+
+#bigtext{
+    font-size:48px;
+    text-align: center;
+}
+
+.text{
+    font-size:126px;
+}
+
+.choices{
+    display:flex;
+    gap:20px
+}
+button{
+    font-size:34px;
+}
